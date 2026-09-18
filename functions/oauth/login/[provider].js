@@ -18,7 +18,7 @@ export async function onRequestGet(context) {
 
 
   await env.DB.prepare(
-    `INSERT INTO oauth_transactions (id_hash, provider, state, nonce, code_verifier, expires_at) VALUES (?, ?, ?, ?, ?, ?)`
+    `INSERT INTO oauth_transactions (id_hash, provider, state_hash, nonce, code_verifier, expires_at) VALUES (?, ?, ?, ?, ?, ?)`
   ).bind(txIdHash, provider, stateHash, nonce, codeVerifier, expiresAt).run();
 
   const redirectUri = `${env.PUBLIC_BASE_URL}/oauth/callback/${provider}`;

@@ -39,7 +39,7 @@ export async function onRequestGet(context) {
   await env.DB.prepare(`DELETE FROM oauth_transactions WHERE id_hash = ?`).bind(txIdHash).run();
 
   const stateHash = await hashSha256(state);
-  if (tx.state !== stateHash || tx.provider !== provider) return new Response('State inválido', { status: 400, headers: headersNoStore });
+  if (tx.state_hash !== stateHash || tx.provider !== provider) return new Response('State inválido', { status: 400, headers: headersNoStore });
 
   const redirectUri = `${env.PUBLIC_BASE_URL}/oauth/callback/${provider}`;
   let subject, email, displayName, issuer;
